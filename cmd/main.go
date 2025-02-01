@@ -1,7 +1,7 @@
 package main
 
 import (
-	"filemanager/internal"
+	"filemanager/internal/filecontroller"
 	"os"
 
 	"flag"
@@ -20,26 +20,7 @@ func main()  {
 		os.Exit(1)
 	}
 
-	if *createFlag == "file" {
-		succ, err := utils.CreateFile(*nameFlag, *pathFlag)
-
-		if (succ) {
-			fmt.Println("[+] File created")
-			os.Exit(0)
-		} else {
-			fmt.Println("[-] Error creating file: ", err)
-			os.Exit(1)
-		}
-	} else if *createFlag == "dir" {
-		succ, err := utils.CreateDirectory(*nameFlag, *pathFlag)
-
-		if (succ) {
-			fmt.Println("[+] Directory created")
-			os.Exit(0)
-		} else {
-			fmt.Println("[-] Error creating directory: ", err)
-			os.Exit(1)
-		}
-	}
+	filecontroller.CreateFileOrDirectory(createFlag, nameFlag, pathFlag)
+	
 	
 }
